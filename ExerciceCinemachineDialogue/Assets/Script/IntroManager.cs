@@ -7,8 +7,13 @@ public class IntroManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject boat;
 
-    public void RevealMenu()
+    public void RevealBoat()
     {
         boat.SetActive(true);
+    }
+
+    public void HidePlayer()
+    {
+        player.SetActive(false);
     }
 }
