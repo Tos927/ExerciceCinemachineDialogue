@@ -14,6 +14,6 @@ public class IntroManager : MonoBehaviour
 
     public void HidePlayer()
     {
-        player.SetActive(false);
+        Debug.Log("Yeeeho !");
     }
 }
