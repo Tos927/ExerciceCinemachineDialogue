@@ -5,14 +5,28 @@ using UnityEngine;
 public class DialogConfig : MonoBehaviour
 {
     [System.Serializable]
-    public struct SentenceConfig
+    public struct SpeakerConfig
     {
         public enum POSITION
         {
             LEFT,
+            MIDDLE,
             RIGHT
         }
         public POSITION position;
+        public SpeakerData data;
+
+        public void SetPosition(POSITION newPosition)
+        {
+            position = newPosition;
+        }
+    }
+
+    public List<SpeakerConfig> speakers = new();
+
+    [System.Serializable]
+    public struct SentenceConfig
+    {
         [TextArea] public string sentence;
         public AudioClip audioClip;
     }
@@ -24,5 +38,5 @@ public class DialogConfig : MonoBehaviour
     public Sprite spriteRight;
 
     [Header("SENTENCES")]
-    public List<SentenceConfig> sentenceList = new List<SentenceConfig>();
+    public List<SentenceConfig> sentenceList = new();
 }

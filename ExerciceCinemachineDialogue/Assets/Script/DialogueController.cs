@@ -44,16 +44,18 @@ public class DialogueController : MonoBehaviour
     {
         DialogConfig.SentenceConfig sentence = dialogConfig.sentenceList[idCurrentSentence];
 
-        switch (sentence.position)
+        DialogConfig.SpeakerConfig speaker = dialogConfig.speakers[0];
+
+        switch (speaker.position)
         {
-            case DialogConfig.SentenceConfig.POSITION.LEFT:
+            case DialogConfig.SpeakerConfig.POSITION.LEFT:
                 txtNameLeft.color = Color.black;
                 txtNameRight.color = Color.clear;
 
                 imgSpriteLeft.color = Color.white;
                 imgSpriteRight.color = Color.gray;
                 break;
-            case DialogConfig.SentenceConfig.POSITION.RIGHT:
+            case DialogConfig.SpeakerConfig.POSITION.RIGHT:
                 txtNameRight.color = Color.black;
                 txtNameLeft.color = Color.clear;
 
