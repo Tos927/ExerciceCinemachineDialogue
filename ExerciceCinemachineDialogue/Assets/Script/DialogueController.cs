@@ -23,7 +23,7 @@ public class DialogueController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayDialogue(DialogConfig dialog)
+    /*public void PlayDialogue(DialogConfig dialog)
     {
         Time.timeScale = 0;
 
@@ -38,7 +38,7 @@ public class DialogueController : MonoBehaviour
         dialogConfig = dialog;
 
         RefreshBox();
-    }
+    }*/
 
     private void RefreshBox()
     {

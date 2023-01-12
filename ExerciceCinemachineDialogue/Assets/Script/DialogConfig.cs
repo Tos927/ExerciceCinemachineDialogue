@@ -14,6 +14,7 @@ public class DialogConfig : MonoBehaviour
             RIGHT
         }
         public POSITION position;
+        public SpeakerDataBase dataBase;
         public SpeakerData data;
 
         public void SetPosition(POSITION newPosition)
@@ -31,11 +32,13 @@ public class DialogConfig : MonoBehaviour
         public AudioClip audioClip;
     }
 
-    [Header("PERSO")]
+    public List<SpeakerDataBase> speakersDatabases = new();
+
+    /*[Header("PERSO")]
     public string nameLeft;
     public Sprite spriteLeft;
     public string nameRight;
-    public Sprite spriteRight;
+    public Sprite spriteRight;*/
 
     [Header("SENTENCES")]
     public List<SentenceConfig> sentenceList = new();
