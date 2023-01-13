@@ -707,19 +707,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakers:
-  - position: 1
-    speakerDatabase: {fileID: 0}
+  - position: 2
+    speakerDatabase: {fileID: 11400000, guid: f7ead2fe142f10647ab1e9ab0c0f04f0, type: 2}
     speakerData:
-      id: 
-      label: 
-      statuses: []
+      id: BG1
+      label: Vil1
+      statuses:
+      - emotion: 1
+        icon: {fileID: 21300000, guid: dae33700bd23f76409a80bf78fdb8a42, type: 3}
+        audioClip: {fileID: 0}
+      - emotion: 3
+        icon: {fileID: 21300000, guid: f2901efd8bb16bc408ad37f017fbf9bc, type: 3}
+        audioClip: {fileID: 0}
+  - position: 2
+    speakerDatabase: {fileID: 11400000, guid: f7ead2fe142f10647ab1e9ab0c0f04f0, type: 2}
+    speakerData:
+      id: BG2
+      label: Mer2
+      statuses:
+      - emotion: 1
+        icon: {fileID: 21300000, guid: dae33700bd23f76409a80bf78fdb8a42, type: 3}
+        audioClip: {fileID: 0}
+      - emotion: 3
+        icon: {fileID: 21300000, guid: f2901efd8bb16bc408ad37f017fbf9bc, type: 3}
+        audioClip: {fileID: 0}
   - position: 0
-    speakerDatabase: {fileID: 0}
+    speakerDatabase: {fileID: 11400000, guid: 268887df2e252d04db329d6152205640, type: 2}
     speakerData:
-      id: 
-      label: 
-      statuses: []
-  speakerDatabases: []
+      id: GG1
+      label: Cop1
+      statuses:
+      - emotion: 2
+        icon: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+        audioClip: {fileID: 0}
+      - emotion: 0
+        icon: {fileID: 21300000, guid: 13e7e6fe43a8aa049bcd610bbc1f5ff8, type: 3}
+        audioClip: {fileID: 0}
+  - position: 0
+    speakerDatabase: {fileID: 11400000, guid: 268887df2e252d04db329d6152205640, type: 2}
+    speakerData:
+      id: GG2
+      label: Nike2
+      statuses:
+      - emotion: 2
+        icon: {fileID: 21300000, guid: fd098fb4cf57bad419701c802e442b7e, type: 3}
+        audioClip: {fileID: 0}
+      - emotion: 0
+        icon: {fileID: 21300000, guid: 13e7e6fe43a8aa049bcd610bbc1f5ff8, type: 3}
+        audioClip: {fileID: 0}
+  speakerDatabases:
+  - {fileID: 11400000, guid: f7ead2fe142f10647ab1e9ab0c0f04f0, type: 2}
+  - {fileID: 11400000, guid: 268887df2e252d04db329d6152205640, type: 2}
+  - {fileID: 11400000, guid: 48ced550bc315ab44a30147335b1eb34, type: 2}
   sentenceConfig: []
 --- !u!4 &1576398606
 Transform:
@@ -748,7 +787,6 @@ GameObject:
   - component: {fileID: 1715113611}
   - component: {fileID: 1715113610}
   - component: {fileID: 1715113609}
-  - component: {fileID: 1715113613}
   m_Layer: 0
   m_Name: PNJ
   m_TagString: Untagged
@@ -835,26 +873,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1715113613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715113608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b5ced5d53764040b342049b34d306b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  txtNameLeft: {fileID: 0}
-  imgSpriteLeft: {fileID: 0}
-  txtNameRight: {fileID: 0}
-  imgSpriteRight: {fileID: 0}
-  txtSentence: {fileID: 0}
-  dialogConfig: {fileID: 0}
-  idCurrentSentence: 0
-  audioSource: {fileID: 0}
 --- !u!1 &1749134969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1096,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993192259}
   m_CullTransparentMesh: 1
+--- !u!1 &2038423313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2038423315}
+  - component: {fileID: 2038423314}
+  m_Layer: 0
+  m_Name: DialogueController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2038423314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038423313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f2058d75629bf43a2621b63afda7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtNameLeft: {fileID: 813325575}
+  imgSpriteLeft: {fileID: 1993192261}
+  txtNameRight: {fileID: 1161735482}
+  imgSpriteRight: {fileID: 565597782}
+  txtSentence: {fileID: 1251740472}
+--- !u!4 &2038423315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038423313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 957.537, y: 312.6045, z: -6.36053}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2072988873
 GameObject:
   m_ObjectHideFlags: 0
