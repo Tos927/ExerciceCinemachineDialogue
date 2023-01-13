@@ -292,7 +292,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &205576536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,6 +1244,7 @@ MonoBehaviour:
   txtNameRight: {fileID: 1161735482}
   imgSpriteRight: {fileID: 565597782}
   txtSentence: {fileID: 1251740472}
+  dialogueScreen: {fileID: 537473583}
 --- !u!4 &2038423315
 Transform:
   m_ObjectHideFlags: 0

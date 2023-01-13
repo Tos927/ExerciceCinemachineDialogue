@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,29 @@ using UnityEngine.UI;
 
 public class DialogController : MonoBehaviour
 {
+    [GUIColor("GetRandomColor")]
     public Text txtNameLeft;
+    
+    [GUIColor("GetRandomColor"), PreviewField(200, Alignment = ObjectFieldAlignment.Left)]
     public Image imgSpriteLeft;
 
+    [GUIColor("GetRandomColor")]
     public Text txtNameRight;
+    [GUIColor("GetRandomColor"), PreviewField(200, Alignment = ObjectFieldAlignment.Left)]
     public Image imgSpriteRight;
 
+    [GUIColor("GetRandomColor")]
     public Text txtSentence;
 
+    [GUIColor("GetRandomColor")]
     private DialogConfig _dialog;
+    [GUIColor("GetRandomColor")]
     private int _idCurrentSentence = 0;
 
+    [GUIColor("GetRandomColor")]
+    public GameObject dialogueScreen;
+
+    [GUIColor("GetRandomColor")]
     private AudioSource _audioSource;
 
     private void Awake()
@@ -25,7 +38,7 @@ public class DialogController : MonoBehaviour
 
     public void PlayDialog(DialogConfig dialog)
     {
-        gameObject.SetActive(true);
+        dialogueScreen.SetActive(true);
 
         txtNameLeft.text = dialog.speakers[0].speakerData.label;
         imgSpriteLeft.sprite = dialog.speakers[0].speakerData.statuses[0].icon;
@@ -87,5 +100,11 @@ public class DialogController : MonoBehaviour
         _dialog = null;
 
         gameObject.SetActive(false);
+    }
+
+    private Color GetRandomColor()
+    {
+        Sirenix.Utilities.Editor.GUIHelper.RequestRepaint();
+        return Color.HSVToRGB(Mathf.Cos((float)UnityEditor.EditorApplication.timeSinceStartup + 1) * 0.5f + .5f, 1, 1);
     }
 }

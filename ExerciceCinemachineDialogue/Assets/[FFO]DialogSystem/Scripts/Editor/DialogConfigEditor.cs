@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking.Types;
 using static DialogConfig;
+using Sirenix.OdinInspector;
 
 [CustomEditor(typeof(DialogConfig))]
 [CanEditMultipleObjects]
@@ -25,13 +26,16 @@ public class DialogConfigEditor : Editor
     public override void OnInspectorGUI()
     {
         InitStyle();
+        GUI.color = GetRandomColor(0);
         DrawSpeakersDatabasePanel();
 
         EditorGUILayout.Space();
 
         EditorGUI.BeginDisabledGroup(_source.speakerDatabases.Count == 0 || _source.speakerDatabases.Exists( x => x == null));
-        
+
+        GUI.color = GetRandomColor(1);
         DrawSpeakersPanel();
+        GUI.color = GetRandomColor(2);
         DrawSentencesPanel();
 
         EditorGUI.EndDisabledGroup();
@@ -81,14 +85,14 @@ public class DialogConfigEditor : Editor
             }
         }
         void DrawFooter()
-        {
+        {            
             if (GUILayout.Button(new GUIContent("Add new database", "")))
             {
                 _source.speakerDatabases.Add(null);
             }
         }
     }
-    
+
     private void DrawSpeakersPanel()
     {
         EditorGUILayout.BeginVertical("box");
@@ -274,6 +278,12 @@ public class DialogConfigEditor : Editor
         _titleStyle = GUI.skin.label;
         _titleStyle.alignment = TextAnchor.MiddleCenter;
         _titleStyle.fontStyle = FontStyle.Bold;
+        
     }
     #endregion
+    private Color GetRandomColor(int t)
+    {
+        Sirenix.Utilities.Editor.GUIHelper.RequestRepaint();
+        return Color.HSVToRGB(Mathf.Cos((float)UnityEditor.EditorApplication.timeSinceStartup + t) * 0.5f + .5f, 1, 1);
+    }
 }
