@@ -26,6 +26,7 @@ public class DialogConfig : MonoBehaviour
     [System.Serializable]
     public struct SentenceConfig
     {
+        public SpeakerData speakerData;
         [TextArea]public string sentence;
         public AudioClip audioClip;
     }

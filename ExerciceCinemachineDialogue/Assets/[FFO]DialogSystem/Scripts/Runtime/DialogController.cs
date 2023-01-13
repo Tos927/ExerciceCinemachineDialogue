@@ -27,11 +27,11 @@ public class DialogController : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        //txtNameLeft.text = dialog.nameLeft;
-        //imgSpriteLeft.sprite = dialog.spriteLeft;
+        txtNameLeft.text = dialog.speakers[0].speakerData.label;
+        imgSpriteLeft.sprite = dialog.speakers[0].speakerData.statuses[0].icon;
 
-        //txtNameRight.text = dialog.nameRight;
-        //imgSpriteRight.sprite = dialog.spriteRight;
+        txtNameRight.text = dialog.speakers[1].speakerData.label;
+        imgSpriteRight.sprite = dialog.speakers[1].speakerData.statuses[0].icon;
         
         _dialog = dialog;
 
@@ -65,10 +65,10 @@ public class DialogController : MonoBehaviour
 
         txtSentence.text = sentence.sentence;
 
-        _audioSource.Stop();
+        //_audioSource.Stop();
         
-        _audioSource.clip = sentence.audioClip;
-        _audioSource.Play();
+        //_audioSource.clip = sentence.audioClip;
+        //_audioSource.Play();
     }
 
     public void NextSentence()
