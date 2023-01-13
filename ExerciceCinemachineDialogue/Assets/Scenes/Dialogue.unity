@@ -1244,6 +1244,7 @@ MonoBehaviour:
   txtNameRight: {fileID: 1161735482}
   imgSpriteRight: {fileID: 565597782}
   txtSentence: {fileID: 1251740472}
+  dialogueScreen: {fileID: 537473583}
 --- !u!4 &2038423315
 Transform:
   m_ObjectHideFlags: 0

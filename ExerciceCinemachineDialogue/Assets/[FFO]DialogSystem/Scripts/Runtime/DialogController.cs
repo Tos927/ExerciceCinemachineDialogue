@@ -16,6 +16,8 @@ public class DialogController : MonoBehaviour
     private DialogConfig _dialog;
     private int _idCurrentSentence = 0;
 
+    public GameObject dialogueScreen;
+
     private AudioSource _audioSource;
 
     private void Awake()
@@ -25,7 +27,7 @@ public class DialogController : MonoBehaviour
 
     public void PlayDialog(DialogConfig dialog)
     {
-        gameObject.SetActive(true);
+        dialogueScreen.SetActive(true);
 
         txtNameLeft.text = dialog.speakers[0].speakerData.label;
         imgSpriteLeft.sprite = dialog.speakers[0].speakerData.statuses[0].icon;
