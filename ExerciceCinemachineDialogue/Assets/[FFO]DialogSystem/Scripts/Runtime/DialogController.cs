@@ -8,12 +8,13 @@ public class DialogController : MonoBehaviour
 {
     [GUIColor("GetRandomColor")]
     public Text txtNameLeft;
-    [GUIColor("GetRandomColor")]
+    
+    [GUIColor("GetRandomColor"), PreviewField(200, Alignment = ObjectFieldAlignment.Left)]
     public Image imgSpriteLeft;
 
     [GUIColor("GetRandomColor")]
     public Text txtNameRight;
-    [GUIColor("GetRandomColor")]
+    [GUIColor("GetRandomColor"), PreviewField(200, Alignment = ObjectFieldAlignment.Left)]
     public Image imgSpriteRight;
 
     [GUIColor("GetRandomColor")]
