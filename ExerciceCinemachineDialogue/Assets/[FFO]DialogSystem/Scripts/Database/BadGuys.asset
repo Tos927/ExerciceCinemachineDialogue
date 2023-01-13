@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aef259a2747bc4ca78bce31fe8a772, type: 3}
   m_Name: BadGuys
   m_EditorClassIdentifier: 
-  speakerDatas: []
+  speakerDatas:
+  - id: BG1
+    label: Vil1
+    statuses:
+    - emotion: 1
+      icon: {fileID: 21300000, guid: dae33700bd23f76409a80bf78fdb8a42, type: 3}
+      audioClip: {fileID: 0}
+    - emotion: 3
+      icon: {fileID: 21300000, guid: f2901efd8bb16bc408ad37f017fbf9bc, type: 3}
+      audioClip: {fileID: 0}
+  - id: BG2
+    label: Mer2
+    statuses:
+    - emotion: 1
+      icon: {fileID: 21300000, guid: dae33700bd23f76409a80bf78fdb8a42, type: 3}
+      audioClip: {fileID: 0}
+    - emotion: 3
+      icon: {fileID: 21300000, guid: f2901efd8bb16bc408ad37f017fbf9bc, type: 3}
+      audioClip: {fileID: 0}
