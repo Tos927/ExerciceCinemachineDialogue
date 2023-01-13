@@ -1,12 +1,11 @@
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Networking.Types;
 using static DialogConfig;
-using static DialogConfig.SpeakerConfig;
 
 [CustomEditor(typeof(DialogConfig))]
 [CanEditMultipleObjects]
@@ -14,26 +13,29 @@ public class DialogConfigEditor : Editor
 {
     private DialogConfig _source;
 
+
     private GUIStyle _titleStyle;
 
     private void OnEnable()
     {
         _source = target as DialogConfig;
-        
     }
 
-    #region EDITOR
-
+    #region INSPECTOR
     public override void OnInspectorGUI()
     {
         InitStyle();
-        DrawSpeakersDataBasePanel();
+        DrawSpeakersDatabasePanel();
 
         EditorGUILayout.Space();
 
+        EditorGUI.BeginDisabledGroup(_source.speakerDatabases.Count == 0 || _source.speakerDatabases.Exists( x => x == null));
         DrawSpeakersPanel();
+        EditorGUI.EndDisabledGroup();
+
     }
-    private void DrawSpeakersDataBasePanel()
+
+    private void DrawSpeakersDatabasePanel()
     {
         EditorGUILayout.BeginVertical("box");
 
@@ -45,49 +47,45 @@ public class DialogConfigEditor : Editor
 
         void DrawHeader()
         {
-
             EditorGUILayout.BeginHorizontal();
 
             EditorGUILayout.LabelField("Speakers Database", _titleStyle);
-            if (GUILayout.Button(new GUIContent("X", "Clear all Databases"), GUILayout.Width(30)))
+            if (GUILayout.Button(new GUIContent("X", "Clear all Database"), GUILayout.Width(30)))
             {
-                if (EditorUtility.DisplayDialog("Delete all Database ?", "Do you want delete all Database ?", "Yes", "No"))
-                    _source.speakersDatabases.Clear();
+                if (EditorUtility.DisplayDialog("Delete all database", "Do you want delete all speakers database?", "Yes", "No"))
+                    _source.speakerDatabases.Clear();
             }
 
             EditorGUILayout.EndHorizontal();
-
         }
         void DrawBody()
         {
-            if (_source.speakersDatabases.Count != 0)
+            if (_source.speakerDatabases.Count != 0)
             {
-                for (int i = 0; i < _source.speakersDatabases.Count; i++)
+                for (int i = 0; i < _source.speakerDatabases.Count; i++)
                 {
                     EditorGUILayout.BeginHorizontal();
-                    _source.speakersDatabases[i] = EditorGUILayout.ObjectField(_source.speakersDatabases[i], typeof(SpeakerDataBase), false) as SpeakerDataBase;
-                    
-                    if (GUILayout.Button(new GUIContent("X", "Remove speakers"), GUILayout.Width(30)))
+                    _source.speakerDatabases[i] = EditorGUILayout.ObjectField(_source.speakerDatabases[i], typeof(SpeakerDatabase), false) as SpeakerDatabase ;
+
+                    if (GUILayout.Button(new GUIContent("X", "Remove database"), GUILayout.Width(30)))
                     {
-                        _source.speakersDatabases.RemoveAt(i);
+                        _source.speakerDatabases.RemoveAt(i);
                         break;
                     }
 
                     EditorGUILayout.EndHorizontal();
                 }
             }
-
         }
         void DrawFooter()
         {
-            if (GUILayout.Button(new GUIContent("Add new Database", "")))
+            if (GUILayout.Button(new GUIContent("Add new database", "")))
             {
-                _source.speakersDatabases.Add(new());
+                _source.speakerDatabases.Add(null);
             }
         }
-
     }
-
+    
     private void DrawSpeakersPanel()
     {
         EditorGUILayout.BeginVertical("box");
@@ -100,18 +98,16 @@ public class DialogConfigEditor : Editor
 
         void DrawHeader()
         {
-
             EditorGUILayout.BeginHorizontal();
 
             EditorGUILayout.LabelField("Speakers", _titleStyle);
             if (GUILayout.Button(new GUIContent("X", "Clear all speakers"), GUILayout.Width(30)))
             {
-                if(EditorUtility.DisplayDialog("Delete all speakers ?", "Do you want delete all speakers ?", "Yes", "No"))
+                if(EditorUtility.DisplayDialog("Delete all speakers", "Do you want delete all speakers ?", "Yes", "No"))
                     _source.speakers.Clear();
             }
 
             EditorGUILayout.EndHorizontal();
-
         }
         void DrawBody()
         {
@@ -122,28 +118,43 @@ public class DialogConfigEditor : Editor
                     SpeakerConfig config = _source.speakers[i];
 
                     EditorGUILayout.BeginHorizontal();
-                    if (_source.speakersDatabases.Count != 0)
+
+                    if (_source.speakerDatabases.Count != 0)
                     {
-                        if (_source.speakersDatabases.Count > 1)
+                        if (_source.speakerDatabases.Count > 1)
                         {
-                            List<string> allDatabaseLabel = new();
-                            foreach (SpeakerDataBase sd in _source.speakersDatabases)
-                                allDatabaseLabel.Add(sd.name);
+                            List<string> alldatabaseLabel = new();
+                            foreach (SpeakerDatabase sd in _source.speakerDatabases)
+                                alldatabaseLabel.Add(sd?.name);
 
-                            int idDatabase = _source.speakersDatabases.FindIndex(x => x == config.dataBase);
-                            idDatabase = EditorGUILayout.Popup(idDatabase, allDatabaseLabel.ToArray());
+                            int idDatabate = _source.speakerDatabases.FindIndex(x => x == config.speakerDatabase);
 
-                            config.dataBase = _source.speakersDatabases[idDatabase];
+                            idDatabate = EditorGUILayout.Popup(idDatabate < 0 ? 0 : idDatabate, alldatabaseLabel.ToArray());
+
+                            config.speakerDatabase = _source.speakerDatabases[idDatabate];
                         }
                         else
-                            config.dataBase = _source.speakersDatabases.First();
+                        {
+                            config.speakerDatabase = _source.speakerDatabases.First();
+                        }
                     }
 
-                    EditorGUILayout.Popup(0, new string[] { "0", "1" });
+                    if (config.speakerDatabase != null)
+                    {
+                        List<string> alldataLabel = new();
+                        foreach (SpeakerData sd in config.speakerDatabase.speakerDatas)
+                            alldataLabel.Add(sd?.label);
 
-                    config.SetPosition((SpeakerConfig.POSITION)EditorGUILayout.EnumPopup(config.position));
+                        int idData = config.speakerDatabase.speakerDatas.FindIndex(x => x == config.speakerData);
+                        
+                        idData = EditorGUILayout.Popup(idData < 0 ? 0 : idData, alldataLabel.ToArray());
 
-                    if (GUILayout.Button(new GUIContent("X", "Remove speakers"), GUILayout.Width(30)))
+                        config.speakerData = config.speakerDatabase.speakerDatas[idData];
+                    }
+
+                    config.position = (SpeakerConfig.POSITION)EditorGUILayout.EnumPopup(config.position);
+
+                    if (GUILayout.Button(new GUIContent("X", "Remove speeker"), GUILayout.Width(30)))
                     {
                         _source.speakers.RemoveAt(i);
                         break;
@@ -154,7 +165,6 @@ public class DialogConfigEditor : Editor
                     _source.speakers[i] = config;
                 }
             }
-
         }
         void DrawFooter()
         {
@@ -165,19 +175,14 @@ public class DialogConfigEditor : Editor
         }
     }
 
-
     #endregion
-    #region STYLE
 
+    #region STYLE
     private void InitStyle()
     {
-        #region SpeakersLabel
         _titleStyle = GUI.skin.label;
         _titleStyle.alignment = TextAnchor.MiddleCenter;
         _titleStyle.fontStyle = FontStyle.Bold;
-        _titleStyle.fontSize = 15;
-        #endregion
     }
-
     #endregion
 }

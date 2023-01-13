@@ -14,12 +14,12 @@ public class DialogConfig : MonoBehaviour
             RIGHT
         }
         public POSITION position;
-        public SpeakerDataBase dataBase;
-        public SpeakerData data;
+        public SpeakerDatabase speakerDatabase;
+        public SpeakerData speakerData;
 
         public void SetPosition(POSITION newPosition)
         {
-            position = newPosition;
+            this.position = newPosition;
         }
     }
 
@@ -28,18 +28,13 @@ public class DialogConfig : MonoBehaviour
     [System.Serializable]
     public struct SentenceConfig
     {
-        [TextArea] public string sentence;
+        [TextArea]public string sentence;
         public AudioClip audioClip;
     }
 
-    public List<SpeakerDataBase> speakersDatabases = new();
-
-    /*[Header("PERSO")]
-    public string nameLeft;
-    public Sprite spriteLeft;
-    public string nameRight;
-    public Sprite spriteRight;*/
+    public List<SpeakerDatabase> speakerDatabases = new();
 
     [Header("SENTENCES")]
-    public List<SentenceConfig> sentenceList = new();
+    public List<SentenceConfig> sentenceConfig = new();
+
 }

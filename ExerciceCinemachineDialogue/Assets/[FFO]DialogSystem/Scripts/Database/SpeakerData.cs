@@ -19,9 +19,9 @@ public class SpeakerData
             HAPPY,
             SAD,
         }
-
         public EMOTION emotion;
         public Sprite icon;
         public AudioClip audioClip;
     }
+ 
 }

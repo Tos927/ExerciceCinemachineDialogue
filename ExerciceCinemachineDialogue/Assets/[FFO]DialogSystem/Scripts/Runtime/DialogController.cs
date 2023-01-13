@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueController : MonoBehaviour
+public class DialogController : MonoBehaviour
 {
     public Text txtNameLeft;
     public Image imgSpriteLeft;
@@ -13,73 +13,69 @@ public class DialogueController : MonoBehaviour
 
     public Text txtSentence;
 
-    private DialogConfig dialogConfig;
-    private int idCurrentSentence;
+    private DialogConfig _dialog;
+    private int _idCurrentSentence = 0;
 
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
-    /*public void PlayDialogue(DialogConfig dialog)
+    public void PlayDialog(DialogConfig dialog)
     {
-        Time.timeScale = 0;
-
         gameObject.SetActive(true);
 
-        txtNameLeft.text = dialog.nameLeft;
-        imgSpriteLeft.sprite = dialog.spriteLeft;
+        //txtNameLeft.text = dialog.nameLeft;
+        //imgSpriteLeft.sprite = dialog.spriteLeft;
 
-        txtNameRight.text = dialog.nameRight;
-        imgSpriteRight.sprite = dialog.spriteRight;
-
-        dialogConfig = dialog;
+        //txtNameRight.text = dialog.nameRight;
+        //imgSpriteRight.sprite = dialog.spriteRight;
+        
+        _dialog = dialog;
 
         RefreshBox();
-    }*/
+    }
 
     private void RefreshBox()
     {
-        DialogConfig.SentenceConfig sentence = dialogConfig.sentenceList[idCurrentSentence];
+        DialogConfig.SentenceConfig sentence = _dialog.sentenceConfig[_idCurrentSentence];
 
-        DialogConfig.SpeakerConfig speaker = dialogConfig.speakers[0];
+        DialogConfig.SpeakerConfig speaker = _dialog.speakers[0];
 
         switch (speaker.position)
         {
             case DialogConfig.SpeakerConfig.POSITION.LEFT:
                 txtNameLeft.color = Color.black;
                 txtNameRight.color = Color.clear;
-
+                
                 imgSpriteLeft.color = Color.white;
                 imgSpriteRight.color = Color.gray;
                 break;
+
             case DialogConfig.SpeakerConfig.POSITION.RIGHT:
-                txtNameRight.color = Color.black;
                 txtNameLeft.color = Color.clear;
+                txtNameRight.color = Color.black;
 
-                imgSpriteRight.color = Color.white;
                 imgSpriteLeft.color = Color.gray;
-                break;
-
-            default:
+                imgSpriteRight.color = Color.white;
                 break;
         }
 
         txtSentence.text = sentence.sentence;
 
-        audioSource.Stop();
-
-        audioSource.clip = sentence.audioClip;
-        audioSource.Play();
+        _audioSource.Stop();
+        
+        _audioSource.clip = sentence.audioClip;
+        _audioSource.Play();
     }
 
     public void NextSentence()
     {
-        idCurrentSentence++;
+        _idCurrentSentence++;
 
-        if (idCurrentSentence < dialogConfig.sentenceList.Count)
+        if (_idCurrentSentence < _dialog.sentenceConfig.Count) 
             RefreshBox();
         else
             CloseDialog();
@@ -87,9 +83,8 @@ public class DialogueController : MonoBehaviour
 
     public void CloseDialog()
     {
-        Time.timeScale = 1;
-        idCurrentSentence = 0;
-        dialogConfig = null;
+        _idCurrentSentence = 0;
+        _dialog = null;
 
         gameObject.SetActive(false);
     }
