@@ -20,7 +20,7 @@ public class DialogController : MonoBehaviour
 
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        //_audioSource = GetComponent<AudioSource>();
     }
 
     public void PlayDialog(DialogConfig dialog)

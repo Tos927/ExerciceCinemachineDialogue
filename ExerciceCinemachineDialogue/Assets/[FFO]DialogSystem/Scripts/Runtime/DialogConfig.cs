@@ -23,8 +23,6 @@ public class DialogConfig : MonoBehaviour
         }
     }
 
-    public List<SpeakerConfig> speakers = new();
-
     [System.Serializable]
     public struct SentenceConfig
     {
@@ -34,7 +32,8 @@ public class DialogConfig : MonoBehaviour
 
     public List<SpeakerDatabase> speakerDatabases = new();
 
-    [Header("SENTENCES")]
+    public List<SpeakerConfig> speakers = new();
+
     public List<SentenceConfig> sentenceConfig = new();
 
 }
