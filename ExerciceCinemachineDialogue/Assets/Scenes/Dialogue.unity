@@ -972,6 +972,12 @@ MonoBehaviour:
       statuses: []
     sentence: Palu + ratio + balek
     audioClip: {fileID: 0}
+  - speakerData:
+      id: 
+      label: 
+      statuses: []
+    sentence: izufhzeriughziuhzih
+    audioClip: {fileID: 0}
 --- !u!4 &1576398606
 Transform:
   m_ObjectHideFlags: 0
@@ -1471,6 +1477,7 @@ GameObject:
   - component: {fileID: 2118145116}
   - component: {fileID: 2118145115}
   - component: {fileID: 2118145114}
+  - component: {fileID: 2118145117}
   m_Layer: 5
   m_Name: Button (Legacy)
   m_TagString: Untagged
@@ -1605,3 +1612,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118145112}
   m_CullTransparentMesh: 1
+--- !u!114 &2118145117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118145112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e42c5cace0064a44abb7c5832f587f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
