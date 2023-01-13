@@ -201,9 +201,9 @@ public class DialogConfigEditor : Editor
         }
         void DrawBody()
         {
-            if (_source.speakers.Count != 0)
+            if (_source.sentenceConfig.Count != 0)
             {
-                for (int i = 0; i < _source.speakers.Count; i++)
+                for (int i = 0; i < _source.sentenceConfig.Count; i++)
                 {
                     SentenceConfig config = _source.sentenceConfig[i];
 
@@ -229,20 +229,19 @@ public class DialogConfigEditor : Editor
                         }
                     }
 
-                    if (config.sentence != null)
+                    if (_source.speakers != null)
                     {
-                        /*List<string> alldataLabel = new();
-                        foreach (SpeakerData sd in config.sentence.speakerDatas)
-                            alldataLabel.Add(sd?.label);
+                        List<string> alldataLabel = new();
+                        foreach (SpeakerConfig sd in _source.speakers)
+                            alldataLabel.Add(sd.speakerData.label);
 
-                        int idData = config.sentence.FindIndex(x => x == config.speakerData);
+                        int idData = _source.speakers.FindIndex(x => x.speakerData == config.speakerData);
 
                         idData = EditorGUILayout.Popup(idData < 0 ? 0 : idData, alldataLabel.ToArray());
 
-                        config.sentence = _source.sentenceConfig[idData].sentence;*/
+                        config.speakerData = _source.sentenceConfig[idData].speakerData;
                     }
 
-                    //config.position = (SpeakerConfig.POSITION)EditorGUILayout.EnumPopup(config.position);
 
                     if (GUILayout.Button(new GUIContent("X", "Remove speeker"), GUILayout.Width(30)))
                     {
@@ -251,6 +250,7 @@ public class DialogConfigEditor : Editor
                     }
 
                     EditorGUILayout.EndHorizontal();
+                    config.sentence = EditorGUILayout.TextArea(config.sentence, GUILayout.Height(50));
 
                     _source.sentenceConfig[i] = config;
                 }
